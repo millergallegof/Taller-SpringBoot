@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -22,12 +24,13 @@ public class UsuarioModel {
     private String email;
     private Integer prioridad;
 
-    @JsonManagedReference
+
     @OneToMany(fetch = FetchType.EAGER,
             targetEntity = RolesModel.class,
             cascade = CascadeType.REMOVE,
             mappedBy = "rolesUsu")
-    private Set<RolesModel> roles = new LinkedHashSet<>();
+    @JsonManagedReference
+    private List<RolesModel> roles = new ArrayList<>();
 
     public UsuarioModel(String nombre, String email, Integer prioridad) {
         this.nombre = nombre;

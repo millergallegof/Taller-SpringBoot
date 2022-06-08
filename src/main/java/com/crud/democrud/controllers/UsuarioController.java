@@ -2,13 +2,11 @@ package com.crud.democrud.controllers;
 
 import com.crud.democrud.models.RolesModel;
 import com.crud.democrud.models.UsuarioModel;
-import com.crud.democrud.services.RolesService;
 import com.crud.democrud.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -18,34 +16,32 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    RolesService rolesService;
-
     @GetMapping()
     public ArrayList<UsuarioModel> obtenerUsuarios() {
         return usuarioService.obtenerUsuarios();
     }
 
 
-    @PostMapping(path = "/{id}")
+    @PostMapping()
     public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario) {
         return this.usuarioService.guardarUsuario(usuario);
     }
 
-    @PostMapping()
+    @PostMapping(path = "/{id}")
     public UsuarioModel actualizarUsuario(@RequestBody UsuarioModel usuario, @PathVariable("id") Long id) {
         usuario.setId(id);
         return this.usuarioService.guardarUsuario(usuario);
     }
 
-    @PostMapping(path = "/roles")
-    public RolesModel actualizarUsuario(@RequestBody UsuarioModel usuario, @PathVariable("id") Long id) {
-        usuario.setId(id);
-        return this.usuarioService.guardarUsuario(usuario);
+    @PostMapping(path = "/roles/{id}")
+    public RolesModel guardarRol(@RequestBody RolesModel roles, UsuarioModel usuario) {
+        roles.setRolesUsu(usuario);
+        return usuarioService.guardarRol(roles, usuario);
     }
 
     @GetMapping(path = "/roles")
-    public List<RolesModel> obtenerRoles() {
-        return this.rolesService.obtenerRoles();
+    public ArrayList<RolesModel> obtenerRoles() {
+        return usuarioService.obtenerRoles();
     }
 
 

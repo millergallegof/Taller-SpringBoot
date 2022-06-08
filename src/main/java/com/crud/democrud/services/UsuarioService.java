@@ -1,6 +1,8 @@
 package com.crud.democrud.services;
 
+import com.crud.democrud.models.RolesModel;
 import com.crud.democrud.models.UsuarioModel;
+import com.crud.democrud.repositories.RolesRepository;
 import com.crud.democrud.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,17 @@ import java.util.Optional;
 public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
+
+    @Autowired
+    RolesRepository rolesRepository;
+
+    public ArrayList<RolesModel> obtenerRoles(){
+        return (ArrayList<RolesModel>) rolesRepository.findAll();
+    }
+
+    public RolesModel guardarRol(RolesModel roles, UsuarioModel usuario){
+        return rolesRepository.save(roles);
+    }
     
     public ArrayList<UsuarioModel> obtenerUsuarios(){
         return (ArrayList<UsuarioModel>) usuarioRepository.findAll();

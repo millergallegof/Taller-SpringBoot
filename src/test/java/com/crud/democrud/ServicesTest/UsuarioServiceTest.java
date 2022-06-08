@@ -1,8 +1,9 @@
 package com.crud.democrud.ServicesTest;
 
+import com.crud.democrud.models.RolesModel;
 import com.crud.democrud.models.UsuarioModel;
+import com.crud.democrud.repositories.RolesRepository;
 import com.crud.democrud.repositories.UsuarioRepository;
-import com.crud.democrud.services.UsuarioService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -19,12 +20,28 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsuarioServiceTest {
     @Autowired
     UsuarioRepository usuarioRepository;
+    @Autowired
+    RolesRepository rolesRepository;
 
     @Test
     public void testGuardarUsuario(){
         UsuarioModel usuarioModel=new UsuarioModel("aquaman","aqua@gmail.com",99);
         UsuarioModel usuarioModelRegistrado = usuarioRepository.save(usuarioModel);
         assertNotNull(usuarioModelRegistrado);
+    }
+
+    @Test
+    public void testGuardarRoles(){
+        UsuarioModel usuarioModel=new UsuarioModel("aquaman","aqua@gmail.com",99);
+        RolesModel rolesModel = new RolesModel("Vendedor", usuarioModel);
+        RolesModel usuarioModelRegistrado = rolesRepository.save(rolesModel);
+        assertNotNull(usuarioModelRegistrado);
+    }
+
+    @Test
+    public void testListarRol(){
+        List<RolesModel> usuarioRolList=(List<RolesModel>) rolesRepository.findAll();
+        assertThat(usuarioRolList).size().isGreaterThan(0);
     }
 
     @Test

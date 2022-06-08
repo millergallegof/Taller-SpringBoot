@@ -19,10 +19,15 @@ public class RolesModel {
     @Column(name = "rol_name", nullable = false, length = 45)
     private String rolNombre;
 
-    @JsonBackReference
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "roles_usu_id", nullable = false)
+    @JsonBackReference
     private UsuarioModel rolesUsu;
 
 
+    public RolesModel(String rolNombre, UsuarioModel rolesUsu) {
+        this.rolNombre = rolNombre;
+        this.rolesUsu = rolesUsu;
+    }
 }
