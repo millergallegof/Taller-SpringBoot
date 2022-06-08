@@ -1,11 +1,14 @@
 package com.crud.democrud.controllers;
 
+import com.crud.democrud.models.RolesModel;
 import com.crud.democrud.models.UsuarioModel;
+import com.crud.democrud.services.RolesService;
 import com.crud.democrud.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -14,6 +17,8 @@ import java.util.Optional;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
+
+    RolesService rolesService;
 
     @GetMapping()
     public ArrayList<UsuarioModel> obtenerUsuarios() {
@@ -31,6 +36,18 @@ public class UsuarioController {
         usuario.setId(id);
         return this.usuarioService.guardarUsuario(usuario);
     }
+
+    @PostMapping(path = "/roles")
+    public RolesModel actualizarUsuario(@RequestBody UsuarioModel usuario, @PathVariable("id") Long id) {
+        usuario.setId(id);
+        return this.usuarioService.guardarUsuario(usuario);
+    }
+
+    @GetMapping(path = "/roles")
+    public List<RolesModel> obtenerRoles() {
+        return this.rolesService.obtenerRoles();
+    }
+
 
     @GetMapping(path = "/{id}")
     public Optional<UsuarioModel> obtenerUsuarioPorId(@PathVariable("id") Long id) {
