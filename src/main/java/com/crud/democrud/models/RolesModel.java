@@ -30,4 +30,7 @@ public class RolesModel {
         this.rolNombre = rolNombre;
         this.rolesUsu = rolesUsu;
     }
+
+    public RolesModel() {
+    }
 }

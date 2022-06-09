@@ -15,17 +15,6 @@ public class UsuarioService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    @Autowired
-    RolesRepository rolesRepository;
-
-    public ArrayList<RolesModel> obtenerRoles(){
-        return (ArrayList<RolesModel>) rolesRepository.findAll();
-    }
-
-    public RolesModel guardarRol(RolesModel roles, UsuarioModel usuario){
-        return rolesRepository.save(roles);
-    }
-    
     public ArrayList<UsuarioModel> obtenerUsuarios(){
         return (ArrayList<UsuarioModel>) usuarioRepository.findAll();
     }

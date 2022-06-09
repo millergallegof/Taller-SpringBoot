@@ -20,28 +20,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UsuarioServiceTest {
     @Autowired
     UsuarioRepository usuarioRepository;
-    @Autowired
-    RolesRepository rolesRepository;
 
     @Test
     public void testGuardarUsuario(){
         UsuarioModel usuarioModel=new UsuarioModel("aquaman","aqua@gmail.com",99);
         UsuarioModel usuarioModelRegistrado = usuarioRepository.save(usuarioModel);
         assertNotNull(usuarioModelRegistrado);
-    }
-
-    @Test
-    public void testGuardarRoles(){
-        UsuarioModel usuarioModel=new UsuarioModel("aquaman","aqua@gmail.com",99);
-        RolesModel rolesModel = new RolesModel("Vendedor", usuarioModel);
-        RolesModel usuarioModelRegistrado = rolesRepository.save(rolesModel);
-        assertNotNull(usuarioModelRegistrado);
-    }
-
-    @Test
-    public void testListarRol(){
-        List<RolesModel> usuarioRolList=(List<RolesModel>) rolesRepository.findAll();
-        assertThat(usuarioRolList).size().isGreaterThan(0);
     }
 
     @Test

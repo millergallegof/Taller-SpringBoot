@@ -2,6 +2,7 @@ package com.crud.democrud.controllers;
 
 import com.crud.democrud.models.RolesModel;
 import com.crud.democrud.models.UsuarioModel;
+import com.crud.democrud.services.RolesService;
 import com.crud.democrud.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
+
+    @Autowired
+    RolesService rolesService;
 
     @GetMapping()
     public ArrayList<UsuarioModel> obtenerUsuarios() {
@@ -36,12 +40,12 @@ public class UsuarioController {
     @PostMapping(path = "/roles/{id}")
     public RolesModel guardarRol(@RequestBody RolesModel roles, UsuarioModel usuario) {
         roles.setRolesUsu(usuario);
-        return usuarioService.guardarRol(roles, usuario);
+        return rolesService.guardarRol(roles, usuario);
     }
 
     @GetMapping(path = "/roles")
     public ArrayList<RolesModel> obtenerRoles() {
-        return usuarioService.obtenerRoles();
+        return rolesService.obtenerRoles();
     }
 
 
